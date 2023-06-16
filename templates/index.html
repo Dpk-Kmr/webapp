@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heart Failure Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Submit the form using AJAX
+            $('form').submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Get the form data
+                var formData = $(this).serialize();
+
+                // Send an AJAX POST request to the server
+                $.ajax({
+                    type: 'POST',
+                    url: '/',
+                    data: formData,
+                    success: function(response) {
+                        // Update the result section with the prediction result
+                        $('#result').text('Prediction Result: ' + response);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Heart Failure Prediction</h1>
+    <form>
+        <label for="Input 1">Gender (0: Male, 1: Female):</label>
+        <input type="number" name="input1" required><br><br>
+        <label for="Input 2">Diabetes (0: Yes, 1: No):</label>
+        <input type="number" name="input2" required><br><br>
+        <label for="Input 3">Systolic blood pressure (Range 50-200):</label>
+        <input type="number" name="input3" required><br><br>
+        <label for="Input 4">Heart rate (Range 40-200):</label>
+        <input type="number" name="input4" required><br><br>
+        <label for="Input 5">Sodium level (Range 120-145):</label>
+        <input type="number" name="input5" required><br><br>
+        
+        <input type="submit" value="Predict">
+    </form>
+
+    <div class="result" id="result"></div>
+</body>
+</html>
