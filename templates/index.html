@@ -20,7 +20,7 @@
                     data: formData,
                     success: function(response) {
                         // Update the result section with the prediction result
-                        $('#result').text('Prediction Result: ' + response);
+                        $('#result').text('' + response);
                     },
                     error: function(error) {
                         console.log(error);
